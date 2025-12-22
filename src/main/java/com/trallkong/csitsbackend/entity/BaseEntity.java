@@ -1,0 +1,26 @@
+package com.trallkong.csitsbackend.entity;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
+
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public class BaseEntity {
+
+    @CreatedDate
+    @Column(name = "create_at", updatable = false, insertable = false)
+    @JsonProperty("create_at")
+    private LocalDateTime createAt;
+
+    @LastModifiedDate
+    @Column(name = "update_at", updatable = false, insertable = false)
+    @JsonProperty("update_at")
+    private LocalDateTime updateAt;
+}
