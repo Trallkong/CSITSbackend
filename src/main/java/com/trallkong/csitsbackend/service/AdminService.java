@@ -4,12 +4,14 @@ import com.trallkong.csitsbackend.entity.Admin;
 import com.trallkong.csitsbackend.repository.AdminRepository;
 import com.trallkong.csitsbackend.security.CryptoUtils;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.beans.Transient;
 import java.util.List;
 
+@Slf4j
 @Service
 public class AdminService {
 
@@ -21,7 +23,7 @@ public class AdminService {
         try {
             return adminRepository.findAll();
         } catch (Exception e) {
-            System.out.println("AdminService-获取所有管理员失败: " + e);
+            log.error("AdminService-获取所有管理员失败: {}", String.valueOf(e));
             throw e;
         }
     }
@@ -31,7 +33,7 @@ public class AdminService {
         try {
             return adminRepository.findById(id).orElse(null);
         } catch (Exception e) {
-            System.out.println("AdminService-获取管理员失败: " + e);
+            log.error("AdminService-根据id获取管理员失败: {}", String.valueOf(e));
             throw e;
         }
     }
@@ -41,17 +43,19 @@ public class AdminService {
         try {
             return adminRepository.findByUsername(username);
         } catch (Exception e) {
-            System.out.println("AdminService-获取管理员失败: " + e);
+            log.error("AdminService-根据username获取管理员失败: {}", String.valueOf(e));
             throw e;
         }
     }
 
     // 添加管理员
-    public void addAdmin(Admin admin) {
+    public Admin addAdmin(Admin admin) {
         try {
-            adminRepository.save(admin);
+            Long count = adminRepository.count() + 1;
+            admin.setAdminId(count);
+            return adminRepository.save(admin);
         } catch (Exception e) {
-            System.out.println("AdminService-添加管理员失败: " + e);
+            log.error("AdminService-添加管理员失败: {}", String.valueOf(e));
             throw e;
         }
     }
@@ -61,7 +65,7 @@ public class AdminService {
         try {
             adminRepository.deleteById(id);
         } catch (Exception e) {
-            System.out.println("AdminService-删除管理员失败: " + e);
+            log.error("AdminService-删除管理员失败: {}", String.valueOf(e));
             throw e;
         }
     }
@@ -72,36 +76,35 @@ public class AdminService {
             admin.setAdminId(id);
             return adminRepository.save(admin);
         } catch (Exception e) {
-            System.out.println("AdminService-修改管理员失败: " + e);
+            log.error("AdminService-修改管理员信息失败: {}", String.valueOf(e));
             throw e;
         }
     }
 
     // 登录
     @Transactional
-    public Admin login(String username, String password) {
-        if (username.isEmpty() || password.isEmpty()) {
-            System.out.println("AdminService-用户名或密码不能为空");
+    public Admin login(String username, String passwordHash) {
+        if (username.isEmpty() || passwordHash.isEmpty()) {
+            log.error("AdminService-用户名或密码不能为空");
             throw new IllegalArgumentException("用户名或密码不能为空");
         }
 
         try {
             Admin admin = getAdminByUsername(username);
             if (admin != null) {
-                boolean res = CryptoUtils.verify(admin.getPasswordHash(), password);
-                if (res) {
-                    System.out.println("AdminService-登录成功");
+                if (passwordHash.equals(admin.getPasswordHash())) {
+                    log.info("AdminService-登录成功");
                     return admin;
                 } else {
-                    System.out.println("AdminService-密码错误");
+                    log.warn("AdminService-密码错误");
                     throw new RuntimeException("密码错误");
                 }
             } else {
-                System.out.println("AdminService-用户不存在");
+                log.warn("AdminService-用户不存在");
                 throw new RuntimeException("用户不存在");
             }
         } catch (Exception e) {
-            System.out.println("AdminService-登录失败: " + e);
+            log.error("AdminService-登录失败: {}", String.valueOf(e));
             throw e;
         }
     }
