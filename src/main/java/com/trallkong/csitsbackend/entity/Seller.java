@@ -46,4 +46,16 @@ public class Seller extends BaseEntity {
     @Column(name = "realname")
     @JsonProperty("realname")
     private String realname;
+
+    @Column(name = "school_id", nullable = false)
+    @JsonProperty("school_id")
+    private Long schoolId;
+
+    @Column(name = "rating")
+    @JsonProperty("rating")
+    private Short rating;
+
+    @Column(name = "remark")
+    @JsonProperty("remark")
+    private String remark;
 }

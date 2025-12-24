@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class Buyer extends BaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "buyer_id", nullable = false)
     @JsonProperty("buyer_id")
     private Long buyerId;
@@ -37,7 +38,27 @@ public class Buyer extends BaseEntity {
     @JsonProperty("realname")
     private String realname;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     @JsonProperty("email")
     private String email;
+
+    @Column(name = "phone", nullable = false)
+    @JsonProperty("phone")
+    private String phone;
+
+    @Column(name = "school_id", nullable = false)
+    @JsonProperty("school_id")
+    private Long schoolId;
+
+    @Column(name = "address", nullable = false)
+    @JsonProperty("address")
+    private String address;
+
+    @Column(name = "rating")
+    @JsonProperty("rating")
+    private Short rating;
+
+    @Column(name = "remark")
+    @JsonProperty("remark")
+    private String remark;
 }
