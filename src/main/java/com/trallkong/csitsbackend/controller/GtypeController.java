@@ -33,4 +33,6 @@ public class GtypeController {
         Gtype createdGtype = gtypeService.addGtype(gtype);
         return ResponseEntity.ok(createdGtype);
     }
+
+
 }

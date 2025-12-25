@@ -2,13 +2,11 @@ package com.trallkong.csitsbackend.service;
 
 import com.trallkong.csitsbackend.entity.Admin;
 import com.trallkong.csitsbackend.repository.AdminRepository;
-import com.trallkong.csitsbackend.security.CryptoUtils;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.beans.Transient;
 import java.util.List;
 
 @Slf4j

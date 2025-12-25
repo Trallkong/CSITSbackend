@@ -7,20 +7,20 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
 @Entity
-@Table(name = "buyer")
+@Table(name = "user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Buyer extends BaseEntity {
+@MappedSuperclass
+@EqualsAndHashCode(callSuper = false)
+public class User extends BaseEntity{
 
     @Id
+    @Column(name = "user_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "buyer_id", nullable = false)
-    @JsonProperty("buyer_id")
-    private Long buyerId;
+    @JsonProperty("user_id")
+    private Long userId;
 
     @Column(name = "username", nullable = false)
     @JsonProperty("username")
@@ -38,17 +38,13 @@ public class Buyer extends BaseEntity {
     @JsonProperty("realname")
     private String realname;
 
-    @Column(name = "email")
-    @JsonProperty("email")
-    private String email;
-
     @Column(name = "phone", nullable = false)
     @JsonProperty("phone")
     private String phone;
 
     @Column(name = "school_id", nullable = false)
     @JsonProperty("school_id")
-    private Long schoolId;
+    private String schoolId;
 
     @Column(name = "address", nullable = false)
     @JsonProperty("address")
