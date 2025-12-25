@@ -1,6 +1,6 @@
 package com.trallkong.csitsbackend.controller;
 
-import com.trallkong.csitsbackend.entity.Order;
+import com.trallkong.csitsbackend.entity.Orders;
 import com.trallkong.csitsbackend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,33 +16,33 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping("/{buyerId}")
-    public ResponseEntity<List<Order> > getAllByBuyerId(@PathVariable Long buyerId) {
-        List<Order> orders = orderService.getAllByBuyerId(buyerId);
+    public ResponseEntity<List<Orders> > getAllByBuyerId(@PathVariable Long buyerId) {
+        List<Orders> orders = orderService.getAllByBuyerId(buyerId);
         return ResponseEntity.ok(orders);
     }
 
     @GetMapping("/{sellerId}")
-    public ResponseEntity<List<Order> > getAllBySellerId(@PathVariable Long sellerId) {
-        List<Order> orders = orderService.getAllBySellerId(sellerId);
+    public ResponseEntity<List<Orders> > getAllBySellerId(@PathVariable Long sellerId) {
+        List<Orders> orders = orderService.getAllBySellerId(sellerId);
         return ResponseEntity.ok(orders);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
-        Order order = orderService.getOrderById(id);
-        return ResponseEntity.ok(order);
+    public ResponseEntity<Orders> getOrderById(@PathVariable Long id) {
+        Orders orders = orderService.getOrderById(id);
+        return ResponseEntity.ok(orders);
     }
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        Order createdOrder = orderService.addOrder(order);
-        return ResponseEntity.ok(createdOrder);
+    public ResponseEntity<Orders> createOrder(@RequestBody Orders orders) {
+        Orders createdOrders = orderService.addOrder(orders);
+        return ResponseEntity.ok(createdOrders);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order order) {
-        Order updatedOrder = orderService.updateOrder(id, order);
-        return ResponseEntity.ok(updatedOrder);
+    public ResponseEntity<Orders> updateOrder(@PathVariable Long id, @RequestBody Orders orders) {
+        Orders updatedOrders = orderService.updateOrder(id, orders);
+        return ResponseEntity.ok(updatedOrders);
     }
 
     @DeleteMapping("/{id}")

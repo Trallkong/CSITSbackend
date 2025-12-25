@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
 @EqualsAndHashCode(callSuper = false)
 public class Gtype extends BaseEntity {
 

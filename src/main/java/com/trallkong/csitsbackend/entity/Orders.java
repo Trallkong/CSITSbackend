@@ -10,13 +10,12 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
 @EqualsAndHashCode(callSuper = false)
-public class Order extends BaseEntity {
+public class Orders extends BaseEntity {
 
     // 订单 id
     @Id

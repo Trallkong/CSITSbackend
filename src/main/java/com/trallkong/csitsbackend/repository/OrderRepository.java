@@ -1,14 +1,14 @@
 package com.trallkong.csitsbackend.repository;
 
-import com.trallkong.csitsbackend.entity.Order;
+import com.trallkong.csitsbackend.entity.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
-    List<Order> getAllByBuyerId(Long buyerId);
+public interface OrderRepository extends JpaRepository<Orders, Long> {
+    List<Orders> getAllByBuyerId(Long buyerId);
 
-    List<Order> getAllBySellerId(Long sellerId);
+    List<Orders> getAllBySellerId(Long sellerId);
 }

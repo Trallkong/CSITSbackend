@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@MappedSuperclass
 public class Gstate extends BaseEntity{
 
     // 商品 id

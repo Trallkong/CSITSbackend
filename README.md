@@ -163,12 +163,12 @@ CSITSbackend/
 - `DELETE /gstate/{id}` - 删除商品状态
 
 ### 订单接口
-- `GET /order/{buyerId}` - 获取买家订单列表
-- `GET /order/{sellerId}` - 获取卖家订单列表
-- `GET /order/{id}` - 获取订单详情
-- `POST /order` - 创建订单
-- `PUT /order/{id}` - 更新订单
-- `DELETE /order/{id}` - 删除订单
+- `GET /orders/{buyerId}` - 获取买家订单列表
+- `GET /orders/{sellerId}` - 获取卖家订单列表
+- `GET /orders/{id}` - 获取订单详情
+- `POST /orders` - 创建订单
+- `PUT /orders/{id}` - 更新订单
+- `DELETE /orders/{id}` - 删除订单
 
 ### 支付接口
 - `GET /payment/{userId}` - 获取用户支付记录

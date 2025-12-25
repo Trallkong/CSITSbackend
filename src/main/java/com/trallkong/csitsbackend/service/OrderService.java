@@ -1,6 +1,6 @@
 package com.trallkong.csitsbackend.service;
 
-import com.trallkong.csitsbackend.entity.Order;
+import com.trallkong.csitsbackend.entity.Orders;
 import com.trallkong.csitsbackend.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public Order getOrderById(Long id) {
+    public Orders getOrderById(Long id) {
         try {
             return orderRepository.findById(id).orElse(null);
         } catch (Exception e) {
@@ -24,7 +24,7 @@ public class OrderService {
         }
     }
 
-    public List<Order> getAllByBuyerId(Long buyerId) {
+    public List<Orders> getAllByBuyerId(Long buyerId) {
         try {
             return orderRepository.getAllByBuyerId(buyerId);
         } catch (Exception e) {
@@ -33,7 +33,7 @@ public class OrderService {
         }
     }
 
-    public List<Order> getAllBySellerId(Long sellerId) {
+    public List<Orders> getAllBySellerId(Long sellerId) {
         try {
             return orderRepository.getAllBySellerId(sellerId);
         } catch (Exception e) {
@@ -42,9 +42,9 @@ public class OrderService {
         }
     }
 
-    public Order addOrder(Order order) {
+    public Orders addOrder(Orders orders) {
         try {
-            return orderRepository.save(order);
+            return orderRepository.save(orders);
         } catch (Exception e) {
             log.error("OrderService-添加订单信息失败");
             throw new RuntimeException(e);
@@ -60,20 +60,20 @@ public class OrderService {
         }
     }
 
-    public Order updateOrder(Long id, Order order) {
+    public Orders updateOrder(Long id, Orders orders) {
         try {
-            Order oldOrder = orderRepository.findById(id).orElse(null);
-            if (oldOrder == null) {
+            Orders oldOrders = orderRepository.findById(id).orElse(null);
+            if (oldOrders == null) {
                 log.info("OrderService-订单信息不存在");
                 return null;
             }
-            oldOrder.setBuyerId(order.getBuyerId());
-            oldOrder.setSellerId(order.getSellerId());
-            oldOrder.setGid(order.getGid());
-            oldOrder.setState(order.getState());
-            oldOrder.setAmount(order.getAmount());
-            oldOrder.setOrderNo(order.getOrderNo());
-            return orderRepository.save(oldOrder);
+            oldOrders.setBuyerId(orders.getBuyerId());
+            oldOrders.setSellerId(orders.getSellerId());
+            oldOrders.setGid(orders.getGid());
+            oldOrders.setState(orders.getState());
+            oldOrders.setAmount(orders.getAmount());
+            oldOrders.setOrderNo(orders.getOrderNo());
+            return orderRepository.save(oldOrders);
         } catch (Exception e) {
             log.error("OrderService-更新订单信息失败");
             throw new RuntimeException(e);
