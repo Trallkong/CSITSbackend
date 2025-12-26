@@ -139,39 +139,54 @@ CSITSbackend/
 
 ## API 接口
 
-### 用户接口
-- `POST /user/{username}/{passwordHash}` - 用户登录
+### 用户接口 (`/user`)
+| 方法 | 路径 | 描述 | 请求参数 |
+|------|------|------|----------|
+| POST | `/user/login/{username}/{passwordHash}` | 用户登录 | username (路径参数), passwordHash (路径参数) |
+| POST | `/user/register` | 用户注册 | User 对象 (请求体) |
 
-### 管理员接口
-- `POST /admin/login/{username}/{passwordHash}` - 管理员登录
+### 管理员接口 (`/admin`)
+| 方法 | 路径 | 描述 | 请求参数 |
+|------|------|------|----------|
+| POST | `/admin/login/{username}/{passwordHash}` | 管理员登录 | username (路径参数), passwordHash (路径参数) |
 
-### 商品接口
-- `GET /goods/{id}` - 获取商品详情
-- `POST /goods` - 创建商品
-- `PUT /goods/{id}` - 更新商品
-- `DELETE /goods/{id}` - 删除商品
+### 商品接口 (`/goods`)
+| 方法 | 路径 | 描述 | 请求参数 |
+|------|------|------|----------|
+| GET | `/goods/{id}` | 获取商品详情 | id (路径参数) |
+| POST | `/goods` | 添加商品 | Goods 对象 (请求体) |
+| PUT | `/goods/{id}` | 修改商品信息 | id (路径参数), Goods 对象 (请求体) |
+| DELETE | `/goods/{id}` | 删除商品 | id (路径参数) |
 
-### 商品类型接口
-- `GET /gtype/{id}` - 获取商品类型
-- `GET /gtype/{name}` - 按名称获取商品类型
-- `POST /gtype` - 创建商品类型
+### 商品类型接口 (`/gtype`)
+| 方法 | 路径 | 描述 | 请求参数 |
+|------|------|------|----------|
+| GET | `/gtype/{id}` | 通过 ID 获取商品类型 | id (路径参数) |
+| GET | `/gtype/{name}` | 通过名称获取商品类型 | name (路径参数) |
+| POST | `/gtype` | 创建商品类型 | Gtype 对象 (请求体) |
 
-### 商品状态接口
-- `GET /gstate/{id}` - 获取商品状态
-- `POST /gstate` - 创建商品状态
-- `PUT /gstate/{id}` - 更新商品状态
-- `DELETE /gstate/{id}` - 删除商品状态
+### 商品状态接口 (`/gstate`)
+| 方法 | 路径 | 描述 | 请求参数 |
+|------|------|------|----------|
+| GET | `/gstate/{id}` | 获取商品状态 | id (路径参数) |
+| POST | `/gstate` | 添加商品状态 | Gstate 对象 (请求体) |
+| PUT | `/gstate/{id}` | 修改商品状态信息 | id (路径参数), Gstate 对象 (请求体) |
+| DELETE | `/gstate/{id}` | 删除商品状态 | id (路径参数) |
 
-### 订单接口
-- `GET /orders/{buyerId}` - 获取买家订单列表
-- `GET /orders/{sellerId}` - 获取卖家订单列表
-- `GET /orders/{id}` - 获取订单详情
-- `POST /orders` - 创建订单
-- `PUT /orders/{id}` - 更新订单
-- `DELETE /orders/{id}` - 删除订单
+### 订单接口 (`/order`)
+| 方法 | 路径 | 描述 | 请求参数 |
+|------|------|------|----------|
+| GET | `/order/{buyerId}` | 获取买家所有订单 | buyerId (路径参数) |
+| GET | `/order/{sellerId}` | 获取卖家所有订单 | sellerId (路径参数) |
+| GET | `/order/{id}` | 获取订单详情 | id (路径参数) |
+| POST | `/order` | 创建订单 | Orders 对象 (请求体) |
+| PUT | `/order/{id}` | 更新订单 | id (路径参数), Orders 对象 (请求体) |
+| DELETE | `/order/{id}` | 删除订单 | id (路径参数) |
 
-### 支付接口
-- `GET /payment/{userId}` - 获取用户支付记录
+### 支付接口 (`/payment`)
+| 方法 | 路径 | 描述 | 请求参数 |
+|------|------|------|----------|
+| GET | `/payment/{userId}` | 获取用户所有支付记录 | userId (路径参数) |
 
 ## 快速开始
 
