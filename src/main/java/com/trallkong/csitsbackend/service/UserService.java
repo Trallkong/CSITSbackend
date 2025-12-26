@@ -88,4 +88,14 @@ public class UserService {
             throw new RuntimeException(e);
         }
     }
+
+    @Transactional
+    public User register(User newUser) {
+        try {
+            return addUser(newUser);
+        } catch (Exception e) {
+            log.error("UserService-注册新用户失败");
+            throw new RuntimeException(e);
+        }
+    }
 }
