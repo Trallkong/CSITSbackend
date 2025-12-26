@@ -20,7 +20,7 @@ public class Gtype extends BaseEntity {
     @Column(name = "gtype_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("gtype_id")
-    private Short gtypeId;
+    private Integer gtypeId;
 
     // 商品类型名
     @Column(name = "type_name", nullable = false)

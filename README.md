@@ -139,11 +139,11 @@ CSITSbackend/
 
 ## API 接口
 
-### 用户接口 (`/user`)
+### 用户接口 (`/users`)
 | 方法 | 路径 | 描述 | 请求参数 |
 |------|------|------|----------|
-| POST | `/user/login/{username}/{passwordHash}` | 用户登录 | username (路径参数), passwordHash (路径参数) |
-| POST | `/user/register` | 用户注册 | User 对象 (请求体) |
+| POST | `/users/login/{username}/{passwordHash}` | 用户登录 | username (路径参数), passwordHash (路径参数) |
+| POST | `/users/register` | 用户注册 | User 对象 (请求体) |
 
 ### 管理员接口 (`/admin`)
 | 方法 | 路径 | 描述 | 请求参数 |

@@ -1,6 +1,6 @@
 package com.trallkong.csitsbackend.service;
 
-import com.trallkong.csitsbackend.entity.User;
+import com.trallkong.csitsbackend.entity.Users;
 import com.trallkong.csitsbackend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ public class UserService {
     private UserRepository userRepository;
 
     // 根据 id 获取用户
-    public User getUserById(Long id) {
+    public Users getUserById(Long id) {
         try {
             return userRepository.findById(id).orElse(null);
         } catch (Exception e) {
@@ -25,9 +25,9 @@ public class UserService {
     }
 
     // 添加用户
-    public User addUser(User user) {
+    public Users addUser(Users users) {
         try {
-            return userRepository.save(user);
+            return userRepository.save(users);
         } catch (Exception e) {
             log.error("UserService-添加用户失败");
             throw new RuntimeException(e);
@@ -35,22 +35,22 @@ public class UserService {
     }
 
     // 更新用户
-    public User updateUser(Long id, User newUser) {
+    public Users updateUser(Long id, Users newUsers) {
         try {
-            User old = userRepository.findById(id).orElse(null);
+            Users old = userRepository.findById(id).orElse(null);
             if (old == null) {
                 log.info("UserService-更新用户失败，用户不存在");
                 return null;
             }
-            old.setUsername(newUser.getUsername());
-            old.setPasswordHash(newUser.getPasswordHash());
-            old.setIdCardHash(newUser.getIdCardHash());
-            old.setRealname(newUser.getRealname());
-            old.setPhone(newUser.getPhone());
-            old.setSchoolId(newUser.getSchoolId());
-            old.setAddress(newUser.getAddress());
-            old.setRating(newUser.getRating());
-            old.setRemark(newUser.getRemark());
+            old.setUsername(newUsers.getUsername());
+            old.setPasswordHash(newUsers.getPasswordHash());
+            old.setIdCardHash(newUsers.getIdCardHash());
+            old.setRealname(newUsers.getRealname());
+            old.setPhone(newUsers.getPhone());
+            old.setSchoolId(newUsers.getSchoolId());
+            old.setAddress(newUsers.getAddress());
+            old.setRating(newUsers.getRating());
+            old.setRemark(newUsers.getRemark());
             return userRepository.save(old);
         } catch (Exception e) {
             log.error("UserService-更新用户失败");
@@ -69,16 +69,16 @@ public class UserService {
     }
 
     @Transactional
-    public User login(String username, String passwordHash) {
+    public Users login(String username, String passwordHash) {
         try {
-            User user = userRepository.findByUsername(username);
-            if (user == null) {
+            Users users = userRepository.findByUsername(username);
+            if (users == null) {
                 log.info("UserService-用户不存在");
                 return null;
             }
-            if (user.getPasswordHash().equals(passwordHash)) {
+            if (users.getPasswordHash().equals(passwordHash)) {
                 log.info("UserService-用户登录成功");
-                return user;
+                return users;
             } else {
                 log.info("UserService-用户密码错误");
                 return null;
@@ -90,9 +90,9 @@ public class UserService {
     }
 
     @Transactional
-    public User register(User newUser) {
+    public Users register(Users newUsers) {
         try {
-            return addUser(newUser);
+            return addUser(newUsers);
         } catch (Exception e) {
             log.error("UserService-注册新用户失败");
             throw new RuntimeException(e);
