@@ -42,13 +42,4 @@ public class GtypeService {
             throw new RuntimeException(e);
         }
     }
-
-    public Gtype getGtypeByTno(String tno) {
-        try {
-            return gtypeRepository.findByTno(tno);
-        } catch (Exception e) {
-            log.error("GtypeService-获取商品类型失败");
-            throw new RuntimeException(e);
-        }
-    }
 }
