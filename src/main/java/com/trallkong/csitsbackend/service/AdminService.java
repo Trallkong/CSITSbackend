@@ -2,6 +2,7 @@ package com.trallkong.csitsbackend.service;
 
 import com.trallkong.csitsbackend.entity.Admin;
 import com.trallkong.csitsbackend.repository.AdminRepository;
+import com.trallkong.csitsbackend.security.CryptoUtils;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +91,7 @@ public class AdminService {
         try {
             Admin admin = getAdminByUsername(username);
             if (admin != null) {
-                if (passwordHash.equals(admin.getPasswordHash())) {
+                if (CryptoUtils.verify(admin.getPasswordHash(), passwordHash)) {
                     log.info("AdminService-登录成功");
                     return admin;
                 } else {

@@ -2,6 +2,7 @@ package com.trallkong.csitsbackend.service;
 
 import com.trallkong.csitsbackend.entity.Goods;
 import com.trallkong.csitsbackend.repository.GoodsRepository;
+import com.trallkong.csitsbackend.repository.GtypeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ public class GoodsService {
 
     @Autowired
     private GoodsRepository goodsRepository;
+
+    @Autowired
+    private GtypeRepository gtypeRepository;
 
     // 通过 id 获取商品
     public Goods getGoodsById(Long id) {

@@ -2,6 +2,7 @@ package com.trallkong.csitsbackend.service;
 
 import com.trallkong.csitsbackend.entity.Users;
 import com.trallkong.csitsbackend.repository.UserRepository;
+import com.trallkong.csitsbackend.security.CryptoUtils;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,14 +70,14 @@ public class UserService {
     }
 
     @Transactional
-    public Users login(String username, String passwordHash) {
+    public Users login(String username, String password) {
         try {
             Users users = userRepository.findByUsername(username);
             if (users == null) {
                 log.info("UserService-用户不存在");
-                return null;
+                throw new RuntimeException("用户不存在");
             }
-            if (users.getPasswordHash().equals(passwordHash)) {
+            if (CryptoUtils.verify(users.getPasswordHash(), password)) {
                 log.info("UserService-用户登录成功");
                 return users;
             } else {
@@ -92,6 +93,25 @@ public class UserService {
     @Transactional
     public Users register(Users newUsers) {
         try {
+            if (userRepository.findByUsername(newUsers.getUsername()) != null) {
+                log.info("UserService-用户已存在");
+                throw new RuntimeException("用户已存在");
+            }
+            if (newUsers.getIdCardHash() == null || newUsers.getIdCardHash().isEmpty()) {
+                log.error("UserService-身份证不能为空");
+                return null;
+            }
+
+            // 加密身份证
+            String hashcode1 = CryptoUtils.encrypt(newUsers.getIdCardHash());
+            newUsers.setIdCardHash(hashcode1);
+            log.info("id_card: {}",hashcode1);
+
+            // 加密密码
+            String hashcode2 = CryptoUtils.encrypt(newUsers.getPasswordHash());
+            newUsers.setPasswordHash(CryptoUtils.encrypt(newUsers.getPasswordHash()));
+            log.info("id_card: {}",hashcode2);
+
             return addUser(newUsers);
         } catch (Exception e) {
             log.error("UserService-注册新用户失败");

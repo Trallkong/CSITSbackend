@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GtypeRepository extends JpaRepository<Gtype, Short> {
     Gtype findByTypeName(String typeName);
+
+    Gtype findByTno(String tno);
 }

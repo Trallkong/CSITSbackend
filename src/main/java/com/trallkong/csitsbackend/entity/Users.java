@@ -29,13 +29,17 @@ public class Users extends BaseEntity{
     @JsonProperty("password_hash")
     private String passwordHash;
 
-    @Column(name = "id_card_hash")
+    @Column(name = "id_card_hash", nullable = false)
     @JsonProperty("id_card_hash")
     private String idCardHash;
 
-    @Column(name = "realname")
+    @Column(name = "realname", nullable = false)
     @JsonProperty("realname")
     private String realname;
+
+    @Column(name = "email")
+    @JsonProperty("email")
+    private String email;
 
     @Column(name = "phone", nullable = false)
     @JsonProperty("phone")
@@ -49,7 +53,7 @@ public class Users extends BaseEntity{
     @JsonProperty("address")
     private String address;
 
-    @Column(name = "rating")
+    @Column(name = "rating", insertable = false)
     @JsonProperty("rating")
     private Short rating;
 
