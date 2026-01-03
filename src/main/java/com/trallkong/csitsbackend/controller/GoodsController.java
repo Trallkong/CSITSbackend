@@ -6,12 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
+
+    // 获取所有商品
+    @GetMapping
+    public ResponseEntity<List<Goods>> getAllGoods() {
+        List<Goods> goodsList = goodsService.getAllGoods();
+        return ResponseEntity.ok(goodsList);
+    }
 
     // 获取商品
     @GetMapping("/{id}")

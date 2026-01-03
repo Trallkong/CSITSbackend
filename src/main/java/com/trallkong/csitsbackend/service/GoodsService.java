@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class GoodsService {
@@ -16,6 +18,16 @@ public class GoodsService {
 
     @Autowired
     private GtypeRepository gtypeRepository;
+
+    // 获取所有商品
+    public List<Goods> getAllGoods() {
+        try {
+            return goodsRepository.findAll();
+        } catch (Exception e) {
+            log.error("GoodsService-获取所有商品失败", e);
+            throw new RuntimeException(e);
+        }
+    }
 
     // 通过 id 获取商品
     public Goods getGoodsById(Long id) {
